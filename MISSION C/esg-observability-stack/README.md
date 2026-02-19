@@ -92,6 +92,10 @@ We can evolve this stack from Reactive to Proactive by adding a Machine Learning
     Alerting: If the temperature is predicted to hit 95°C based on current acceleration, trigger an alert 10 minutes before the failure happens.
 
     ESG Impact: Predictive maintenance reduces "Waste Units" caused by sudden machine failure, further improving ESG scores.
+<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-40-38" src="https://github.com/user-attachments/assets/4cf3f425-12b7-443b-9d0f-7b1684a89aa1" />
+<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-39-55" src="https://github.com/user-attachments/assets/400c2552-1ef2-4b37-b6d8-6b6c5677438c" />
+<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-39-50" src="https://github.com/user-attachments/assets/01ed2b39-6682-4405-bb20-2d4460119329" />
+<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-38-06" src="https://github.com/user-attachments/assets/3372689f-1825-44ac-ae0b-2f4c84242092" />
 
 
     

@@ -1,0 +1,29 @@
+name: MLOps Deployment Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-simulate-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Docker Image
+      run: |
+        docker build -t waste-inference-api:${{ github.sha }} .
+        docker tag waste-inference-api:${{ github.sha }} waste-inference-api:latest
+
+    - name: Simulate AWS Deployment & Rollback Strategy
+      run: |
+        echo "✅ Image successfully built with tag: ${{ github.sha }}"
+        echo "🚀 Simulating push to AWS ECR..."
+        echo "🔄 Simulating deployment to AWS ECS/Fargate..."
+        echo "🛡️ Rollback Plan: If the new container fails the health check, the orchestration tool will automatically revert to the previous Git SHA tag."

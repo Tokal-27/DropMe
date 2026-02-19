@@ -1,129 +1,191 @@
-🏗️ System Architecture
-📊 Monitoring & ESG Queries (PromQL)
-🌿 ESG Impact Metrics
+# 🏭 OPERATIONS & ESG OBSERVABILITY STACK  
 
-Carbon Footprint (kg CO₂):
+---
 
+# 📊 ESG Metrics & PromQL Queries
+
+## 🌿 Carbon Footprint Calculation
+
+```promql
 esg_energy_kwh_total * 0.4
+```
 
-Energy Consumption Trend:
+Converts energy usage (kWh) into CO₂ emissions using a standardized emission factor.
 
+---
+
+## 📈 Energy Consumption Trend
+
+```promql
 sum(esg_energy_kwh_total)
-⚙️ Operational Health
+```
 
-Temperature Monitoring
+Tracks cumulative energy impact across machines.
 
+---
+
+# ⚙️ Operational Health & Efficiency
+
+## 🌡 Temperature Monitoring
+
+```promql
 machine_temperature
+```
 
-Threshold: > 90°C → anomaly
+**Recommended threshold:**  
+Alert when temperature > 90°C
 
-System Uptime Integrity
+---
 
+## ⏱ System Uptime Integrity
+
+```promql
 avg_over_time(machine_status[1h]) * 100
+```
 
-Provides operational availability percentage.
+Provides operational availability percentage over the past hour.
 
-Downtime Detection
+---
 
+## 🚨 Downtime Detection
+
+```promql
 changes(machine_status[5m])
-🛡️ ESG Traceability Concept
-✅ Fields That Make Recycling Auditable
+```
 
-To ensure ESG-grade reporting, each record includes:
+Detects sudden machine status changes within 5 minutes.
 
-machine_id
+---
 
-timestamp
+# 🛡️ ESG Traceability Concept
 
-energy_kwh
+## ✅ Fields That Make Recycling Auditable
 
-transaction_count
+To guarantee ESG auditability, each record contains:
 
-error_code
+- `machine_id`
+- `timestamp`
+- `energy_kwh`
+- `transaction_count`
+- `error_code`
 
 These fields enable:
 
-Traceability per machine
+- Machine-level environmental tracking  
+- Historical reconstruction of production impact  
+- Third-party audit verification  
 
-Historical reconstruction of environmental impact
+---
 
-Audit-ready reporting
+# ⚠️ Data Integrity & Governance Risks
 
-⚠️ Duplicate or Missing Data Impact
+## Duplicate Data
 
-Duplicate data inflates energy usage → false carbon reporting.
+- Inflates energy usage  
+- Distorts carbon footprint reporting  
+- Misrepresents ESG performance  
 
-Missing telemetry creates ESG blind spots.
+## Missing Data
 
-In ESG compliance, a "Data Gap" equals governance failure.
+- Creates audit blind spots  
+- Reduces reporting accuracy  
+- Signals governance failure  
 
-Observability makes both scenarios visible.
+Observability ensures gaps are visible and traceable.
 
-🔐 What Guarantees Metric Integrity?
+---
 
-Prometheus uses append-only time-series storage.
+# 🔐 What Guarantees Metric Integrity?
 
-Historical metrics cannot be edited.
+- Append-only time-series storage  
+- Immutable historical records  
+- Transparent calculation logic  
+- Permanent anomaly visibility  
 
-All anomalies remain historically visible.
+This prevents ESG manipulation or greenwashing.
 
-Transparent calculation logic via PromQL.
+---
 
-This reduces the risk of ESG manipulation or greenwashing.
+# 🔴 Identified Weakest Point
 
-🔴 Identified Weakest Point
-Static Infrastructure Dependencies
+## Static Infrastructure Dependencies
 
-Fixed ports (3001, 8000, 9090)
+### Current Risks:
 
-Manual scaling
+- Fixed ports (3001, 8000, 9090)  
+- Single collector instance  
+- Manual scaling  
+- Local-only deployment constraints  
 
-Single Prometheus instance
+Port conflicts or container failures can halt observability.
 
-A port conflict or container crash can disrupt observability.
+---
 
-Future Improvement
+# 🔧 Recommended Improvements
 
-Reverse proxy (e.g., Nginx)
+Future production hardening:
 
-Service discovery
+- Reverse proxy (dynamic routing)  
+- Service discovery  
+- Horizontal scaling  
+- Remote storage backend  
+- High-availability collector setup  
 
-Horizontal scaling
+---
 
-Remote storage backend
+# 🔮 Predictive Maintenance Roadmap
 
-🔮 Predictive Maintenance Roadmap
+The stack can evolve from **Reactive Monitoring** to **Proactive Intelligence**.
 
-The system can evolve from Reactive Monitoring to Proactive Intelligence by adding:
+## Proposed Enhancement
 
-🤖 ML Sidecar Container
+Add a Machine Learning sidecar container capable of:
 
-Capabilities:
+- Temperature gradient analysis  
+- Failure probability estimation  
+- Early anomaly detection  
 
-Temperature gradient analysis (rate of increase)
+### Example Logic
 
-Failure probability estimation
+If projected temperature ≥ 95°C within 10 minutes → trigger early alert.
 
-Early anomaly detection
+---
 
-Example Logic
+# 🌱 ESG Impact of Predictive Maintenance
 
-If projected temperature ≥ 95°C within 10 minutes → trigger alert.
+- Reduces sudden machine failure  
+- Minimizes wasted material batches  
+- Prevents emergency energy spikes  
+- Improves uptime transparency  
+- Enhances ESG scoring  
 
-🌱 ESG Impact of Predictive Maintenance
+Predictive maintenance directly improves sustainability metrics.
 
-Reduces unexpected machine failure
+---
 
-Minimizes wasted material batches
+# 📚 Documentation Deliverables
 
-Improves uptime reporting accuracy
+This project includes:
 
-Lowers emergency energy spikes
+- Architecture design  
+- Deployment instructions  
+- Observability dashboards  
+- ESG traceability model  
+- Governance analysis  
+- Weakness identification  
+- Predictive maintenance roadmap  
 
-This directly improves ESG performance metrics. 
+---
 
-shows 
+# ✅ Final Insight
 
+This stack demonstrates how:
+
+- Operational Monitoring  
+- ESG Accountability  
+- System Thinking  
+
+can be unified into a transparent, auditable, and production-ready observability framework.
 <img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-40-38" src="https://github.com/user-attachments/assets/414a7638-75c8-45bb-9756-24c2d37178d4" />
 
 <img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-39-55" src="https://github.com/user-attachments/assets/f3a744a6-115e-42a2-9dc4-4a210442f69a" />

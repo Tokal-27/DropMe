@@ -1,101 +1,134 @@
-# 🏭 OPERATIONS & ESG OBSERVABILITY STACK (Monitoring & System Thinking)
-
-## 🎯 Project Overview
-This project demonstrates a robust, containerized observability stack designed for an industrial context. It goes beyond traditional monitoring by integrating **ESG (Environmental, Social, and Governance)** metrics, ensuring that machine operations are not only efficient but also sustainable and auditable.
-
----
-
-## 🏗️ System Architecture & Components
-The system utilizes a modular "Producer-Collector-Visualizer" pattern:
-
-1. **Telemetry Generator (Python/Edge)**: 
-   - Simulates an IoT-enabled industrial machine.
-   - Produces real-time signals: `Uptime`, `Temperature`, `Energy Consumption`, and `Error Codes`.
-2. **Collection Service (Prometheus)**: 
-   - Acting as a **Time-Series Database (TSDB)**.
-   - Scrapes metrics every 5 seconds, ensuring high-resolution historical data.
-3. **Observability Layer (Grafana)**: 
-   - Translates raw metrics into actionable business and environmental insights.
-
-<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-40-38" src="https://github.com/user-attachments/assets/4cf3f425-12b7-443b-9d0f-7b1684a89aa1" />
-<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-39-55" src="https://github.com/user-attachments/assets/400c2552-1ef2-4b37-b6d8-6b6c5677438c" />
-<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-39-50" src="https://github.com/user-attachments/assets/01ed2b39-6682-4405-bb20-2d4460119329" />
-<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-38-06" src="https://github.com/user-attachments/assets/3372689f-1825-44ac-ae0b-2f4c84242092" />
-
----
-
-## 🚀 Deployment & Troubleshooting
-
-### 1. Prerequisites
-- Docker & Docker Compose.
-- **Port Management**: The system is configured to use Port **3001** for Grafana to avoid common conflicts with local instances on Port 3000.
-
-### 2. Quick Start
-```bash
-# Clean up any conflicting containers
-docker rm -f $(docker ps -aq)
-
-# Build and start the stack
-docker-compose up --build -d
-
-
-3. Access Ports
-
-    Grafana Dashboard: http://localhost:3001 (User: admin / Pass: admin)
-
-    Prometheus UI: http://localhost:9090
-
-    Machine Metrics (Raw): http://localhost:8000
-
+🏗️ System Architecture
 📊 Monitoring & ESG Queries (PromQL)
-🌿 ESG & Sustainability (The "E" in ESG)
+🌿 ESG Impact Metrics
 
-To make metrics auditable, we use calculated fields to show environmental impact:
+Carbon Footprint (kg CO₂):
 
-    Carbon Footprint (kg CO2):
-    esg_energy_kwh_total * 0.4
-    Logic: Converts raw energy data into CO2 emissions using a verifiable conversion factor.
+esg_energy_kwh_total * 0.4
 
-    Energy Consumption Trend:
-    sum(esg_energy_kwh_total)
+Energy Consumption Trend:
 
-⚙️ Operational Health & Efficiency
+sum(esg_energy_kwh_total)
+⚙️ Operational Health
 
-    Machine Temperature Monitoring:
-    machine_temperature
-    Visualization: Use Time Series with Thresholds (Red > 90°C) for Anomaly Detection.
+Temperature Monitoring
 
-    System Uptime Integrity:
-    avg_over_time(machine_status[1h]) * 100
-    Audit Logic: Provides a percentage of operational availability to ensure reporting honesty.
+machine_temperature
 
+Threshold: > 90°C → anomaly
+
+System Uptime Integrity
+
+avg_over_time(machine_status[1h]) * 100
+
+Provides operational availability percentage.
+
+Downtime Detection
+
+changes(machine_status[5m])
 🛡️ ESG Traceability Concept
-Auditability Fields
+✅ Fields That Make Recycling Auditable
 
-By capturing machine_id alongside energy_kwh and a precise timestamp, we create a "Digital Twin" of the machine's impact. This makes the recycling or production process transparent for third-party auditors.
-Data Integrity & Greenwashing Prevention
+To ensure ESG-grade reporting, each record includes:
 
-    Immutable Timestamps: Prometheus records data in an append-only format. This prevents "Greenwashing" because historical pollution or energy spikes cannot be deleted or edited.
+machine_id
 
-    Handling Missing Data: Gaps in telemetry (No Data) are explicitly visible. In ESG auditing, a "Data Gap" is treated as a failure in governance, forcing transparency.
+timestamp
 
-📝 Final Insights & Future Roadmap
-🔴 The Weakest Point
+energy_kwh
 
-The current system's weakest point is Static Infrastructure Dependencies. As identified during deployment, port conflicts (e.g., Port 8000 or 3000 being occupied) can halt observability.
+transaction_count
 
-    Solution: Future iterations should use a Reverse Proxy (Nginx) or Service Discovery to handle dynamic port allocation.
+error_code
 
-🔮 Predictive Maintenance (Next Step)
+These fields enable:
 
-We can evolve this stack from Reactive to Proactive by adding a Machine Learning sidecar container:
+Traceability per machine
 
-    Trend Analysis: Analyze the temperature gradient (Rate of increase).
+Historical reconstruction of environmental impact
 
-    Alerting: If the temperature is predicted to hit 95°C based on current acceleration, trigger an alert 10 minutes before the failure happens.
+Audit-ready reporting
 
-    ESG Impact: Predictive maintenance reduces "Waste Units" caused by sudden machine failure, further improving ESG scores.
+⚠️ Duplicate or Missing Data Impact
 
+Duplicate data inflates energy usage → false carbon reporting.
 
+Missing telemetry creates ESG blind spots.
 
-    
+In ESG compliance, a "Data Gap" equals governance failure.
+
+Observability makes both scenarios visible.
+
+🔐 What Guarantees Metric Integrity?
+
+Prometheus uses append-only time-series storage.
+
+Historical metrics cannot be edited.
+
+All anomalies remain historically visible.
+
+Transparent calculation logic via PromQL.
+
+This reduces the risk of ESG manipulation or greenwashing.
+
+🔴 Identified Weakest Point
+Static Infrastructure Dependencies
+
+Fixed ports (3001, 8000, 9090)
+
+Manual scaling
+
+Single Prometheus instance
+
+A port conflict or container crash can disrupt observability.
+
+Future Improvement
+
+Reverse proxy (e.g., Nginx)
+
+Service discovery
+
+Horizontal scaling
+
+Remote storage backend
+
+🔮 Predictive Maintenance Roadmap
+
+The system can evolve from Reactive Monitoring to Proactive Intelligence by adding:
+
+🤖 ML Sidecar Container
+
+Capabilities:
+
+Temperature gradient analysis (rate of increase)
+
+Failure probability estimation
+
+Early anomaly detection
+
+Example Logic
+
+If projected temperature ≥ 95°C within 10 minutes → trigger alert.
+
+🌱 ESG Impact of Predictive Maintenance
+
+Reduces unexpected machine failure
+
+Minimizes wasted material batches
+
+Improves uptime reporting accuracy
+
+Lowers emergency energy spikes
+
+This directly improves ESG performance metrics. 
+
+shows 
+
+<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-40-38" src="https://github.com/user-attachments/assets/414a7638-75c8-45bb-9756-24c2d37178d4" />
+
+<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-39-55" src="https://github.com/user-attachments/assets/f3a744a6-115e-42a2-9dc4-4a210442f69a" />
+
+<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-39-50" src="https://github.com/user-attachments/assets/fa3e5765-ecf9-4183-83d0-1898f207c244" />
+
+<img width="1920" height="1080" alt="Screenshot from 2026-02-20 01-38-06" src="https://github.com/user-attachments/assets/7e5992e8-82ba-4f53-84b6-271ee8ff9ca0" />
+

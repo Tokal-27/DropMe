@@ -214,6 +214,15 @@ jobs:
         echo "🔄 Simulating deployment to orchestration service..."
         echo "🛡️ Rollback Plan: If health check fails, auto-revert to previous Git SHA tag."
 ```
+<img width="1915" height="1071" alt="Screenshot from 2026-02-19 21-06-07" src="https://github.com/user-attachments/assets/19595698-cb8c-4abe-b671-537833e5b75f" />
+
+<img width="1915" height="1071" alt="Screenshot from 2026-02-19 21-06-17" src="https://github.com/user-attachments/assets/2a1e4d07-c1c9-436d-900e-652bbf97e48b" />
+
+<img width="1915" height="1071" alt="Screenshot from 2026-02-19 21-06-23" src="https://github.com/user-attachments/assets/7b75bb80-7317-45f8-9dab-4baf660144d7" />
+
+<img width="1915" height="1071" alt="Screenshot from 2026-02-19 21-07-16" src="https://github.com/user-attachments/assets/37b5ee10-db4c-4b88-a094-4e7d02f3e3f6" />
+
+<img width="1915" height="1071" alt="Screenshot from 2026-02-19 21-07-29" src="https://github.com/user-attachments/assets/2e1139e0-6d81-4e81-bb46-8381e16d4580" />
 
 
 Watch The Demo ---->> https://drive.google.com/file/d/190GZDHyK6b2_jCf41SCj8jo_MzgpxntQ/view?usp=drive_link

@@ -22,6 +22,4 @@ The technology stack used in the DropMe project includes:
 - **Python** (89.8%): The primary programming language for developing the application logic.
 - **Dockerfile** (10.2%): For containerizing the application and ensuring consistency across different environments.
 
-## Conclusion
 
-This project aims to bring efficiency and organization to drop-off tasks using a modern technology stack, focusing on clean code principles and automated deployment.
